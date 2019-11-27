@@ -32,6 +32,7 @@ public class ParkingPage  extends Activity {
             }
         });
         myDialog.show();
+
     }
     public void fullpopup(View v) {
         TextView txtclose;

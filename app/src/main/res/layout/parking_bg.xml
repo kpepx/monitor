@@ -4,46 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/parking">
+    android:background="@drawable/bgparking">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="191dp"
+        android:layout_height="75dp"
+        android:fontFamily="@font/monsemibold"
+        android:text="FIBO"
+        android:textColor="@color/colorBlack"
+        android:textSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.151" />
 
     <ImageView
-        android:id="@+id/green"
+        android:id="@+id/imageView"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="293dp"
-        android:layout_height="372dp"
-        android:background="@drawable/green"
+        android:layout_width="961dp"
+        android:layout_height="567dp"
+        android:background="@drawable/infobox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.229"
+        app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.678" />
 
     <Button
-        android:id="@+id/buttoninfo"
+        android:id="@+id/leavepage"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:background="@drawable/info"
-
+        android:background="@drawable/multiply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.986"
+        app:layout_constraintHorizontal_bias="0.854"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019" />
-
-    <Button
-        android:id="@+id/buttonback"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:background="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintVertical_bias="0.315" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
