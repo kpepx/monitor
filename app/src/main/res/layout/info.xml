@@ -59,7 +59,8 @@
             android:fontFamily="@font/monsemibold"
             android:text="Capacity:"
             android:textColor="@color/colorBlack"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:layout_gravity="center"/>
         <TextView
             android:id="@+id/available"
             android:layout_width="814dp"
@@ -67,28 +68,34 @@
             android:fontFamily="@font/monsemibold"
             android:text="Available:"
             android:textColor="@color/colorBlack"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:layout_gravity="center"/>
         <TextView
             android:id="@+id/open"
             android:layout_width="814dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monsemibold"
             android:text="Open:"
+            android:layout_gravity="center"
             android:textColor="@color/colorBlack"
             android:textSize="40dp" />
+
         <TextView
             android:id="@+id/close"
             android:layout_width="814dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monsemibold"
             android:text="Close:"
+            android:layout_gravity="center"
             android:textColor="@color/colorBlack"
             android:textSize="40dp" />
+
         <TextView
             android:id="@+id/emcall"
             android:layout_width="814dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monsemibold"
+            android:layout_gravity="center"
             android:text="Emergency call: 098-765-4321"
             android:textColor="@color/colorBlack"
             android:textSize="40dp" />
