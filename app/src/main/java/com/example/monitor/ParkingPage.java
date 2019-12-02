@@ -29,7 +29,7 @@ public class ParkingPage extends Fragment {
     Dialog myDialog;
     String rfid = "F2 B2 FC 1E";
     public String value_place;
-    TextView close_txt,slot_txt,available_txt;
+    TextView close_txt,slot_txt,available_txt,open_txt;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,8 +38,7 @@ public class ParkingPage extends Fragment {
         final ImageView image_1 = (ImageView) view.findViewById(R.id.image1);
         final ImageView image_2 = (ImageView) view.findViewById(R.id.image2);
         final ImageView image_3 = (ImageView) view.findViewById(R.id.image3);
-        final TextView name = (TextView) view.findViewById(R.id.namePark1);
-        final TextView slot_txt = (TextView) view.findViewById(R.id.capacity);
+        final TextView name = (TextView) view.findViewById(R.id.namePark);
         Button buttonback = (Button) view.findViewById(R.id.buttonback);
         buttonback.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -83,17 +82,26 @@ public class ParkingPage extends Fragment {
                             else if (car1.equals("0")) {
                                 image_1.setImageResource(R.drawable.green);
                             }
+                            else{
+                                image_3.setImageResource(R.drawable.notavaliable);
+                            }
                             if (car2.equals("1")) {
                                 image_2.setImageResource(R.drawable.red);
                             }
                             else if (car2.equals("0")) {
                                 image_2.setImageResource(R.drawable.green);
                             }
+                            else{
+                                image_3.setImageResource(R.drawable.notavaliable);
+                            }
                             if (car3.equals("1")) {
-                                image_2.setImageResource(R.drawable.red);
+                                image_3.setImageResource(R.drawable.red);
                             }
                             else if (car3.equals("0")) {
                                 image_3.setImageResource(R.drawable.green);
+                            }
+                            else{
+                                image_3.setImageResource(R.drawable.notavaliable);
                             }
                         }
                         @Override
@@ -118,6 +126,7 @@ public class ParkingPage extends Fragment {
         TextView txtclose;
         myDialog.setContentView(R.layout.info);
         close_txt = (TextView) myDialog.findViewById(R.id.close);
+        open_txt = (TextView) myDialog.findViewById(R.id.open);
         slot_txt = (TextView) myDialog.findViewById(R.id.capacity);
         available_txt = (TextView) myDialog.findViewById(R.id.available);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -127,26 +136,27 @@ public class ParkingPage extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map map = (Map) dataSnapshot.getValue();
                 String value_slot = String.valueOf(map.get("slot"));
-                slot_txt.setText("Capacity: "+value_slot+" cars");
-                final int[] num_available = new int[1];
-                for (int i = 1;i < Integer.parseInt(value_slot); i++) {
-                    final String num_slot = Integer.toString(i);
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    data = database.getReference().child("Park").child(value_place).child("CarIn");
-                    data.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Map map = (Map) dataSnapshot.getValue();
-                            String value_available = String.valueOf(map.get("car" + num_slot));
-//                            num_available[0] = num_available[0] + Integer.parseInt(value_available);
+                slot_txt.setText("Capacity: "+value_slot+" Cars");
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                data = database.getReference().child("Park").child(value_place).child("CarIn");
+                data.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int count = 0;
+                        for (DataSnapshot carin : dataSnapshot.getChildren()) {
+                            if (carin.getValue(int.class) == 0) {
+                                count++;
+                            }
+                            carin.getKey();
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-//                available_txt.setText("Available: "+Integer.toString(num_available[0])+" cars");
+                        available_txt.setText("Available: "+Integer.toString(count)+" Cars");
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+                open_txt.setText("Open: "+dataSnapshot.child("open").child("hour").getValue()+":"+dataSnapshot.child("open").child("min").getValue()+" AM");
+                close_txt.setText("Close: "+dataSnapshot.child("close").child("hour").getValue()+":"+dataSnapshot.child("open").child("min").getValue()+" PM");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
