@@ -79,23 +79,28 @@ public class HomeFragment extends Fragment implements
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
         activity = getActivity();
+        myPrefs = this.getActivity().getSharedPreferences("ID", 0);
         ToggleButton togglebutton = rootView.findViewById(R.id.toggleButton);
-
         try{
             MapsInitializer.initialize(getActivity().getApplicationContext());
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
+//        if(myPrefs.getBoolean("togglebutton1", false)){
+//            togglebutton.setChecked(myPrefs.getBoolean("togglebutton1", false));
+//
+//        }
         togglebutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    myPrefs.edit().putBoolean("togglebutton1", true).apply();
                     Toast.makeText(getActivity(), "Map: Dark mode", Toast.LENGTH_SHORT).show();
                     mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.darkmode));
                 }
                 else {
+                    myPrefs.edit().putBoolean("togglebutton1",false).apply();
                     Toast.makeText(getActivity(), "Map: Normal", Toast.LENGTH_SHORT).show();
                     mMap.setMapType(com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL);
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
