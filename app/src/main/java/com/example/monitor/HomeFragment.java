@@ -1,9 +1,11 @@
 package com.example.monitor;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Looper;
@@ -66,6 +68,8 @@ public class HomeFragment extends Fragment implements
     private LatLng CBlatlng = new LatLng(13.650780893328243, 100.49339553366849);
     private int yourZIndex = 1;
     SharedPreferences myPrefs;
+    Activity activity;
+
 
     @Nullable
     @Override
@@ -74,6 +78,8 @@ public class HomeFragment extends Fragment implements
         mapView = (MapView) rootView.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
+        activity = getActivity();
+        ToggleButton togglebutton = rootView.findViewById(R.id.toggleButton);
 
         try{
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -82,28 +88,21 @@ public class HomeFragment extends Fragment implements
             e.printStackTrace();
         }
 
-        ToggleButton togglebutton = mapView.findViewById(R.id.toggleButton);
-
-//        togglebutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked) {
-//                    Toast.makeText(getActivity(), "Map: Dark mode", Toast.LENGTH_SHORT).show();
-////                    mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.darkmode));
-//
-////                    Fragment frg = null;
-////                    frg = getFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-////                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
-////                    ft.detach(frg);
-////                    ft.attach(frg);
-////                    ft.commit();
-//
-//                }
-//                else {
-//                    Toast.makeText(getActivity(), "Map: Normal", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        togglebutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    Toast.makeText(getActivity(), "Map: Dark mode", Toast.LENGTH_SHORT).show();
+                    mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.darkmode));
+                }
+                else {
+                    Toast.makeText(getActivity(), "Map: Normal", Toast.LENGTH_SHORT).show();
+                    mMap.setMapType(com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new HomeFragment()).commit();
+                }
+            }
+        });
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getActivity());
 
@@ -138,14 +137,12 @@ public class HomeFragment extends Fragment implements
             mMap.setMyLocationEnabled(true);
         }
 
-
 //                 UiSettings uiset = googleMap.getUiSettings();
 //                 uiset.setZoomGesturesEnabled(true);
 //                 uiset.setMyLocationButtonEnabled(true)
         //Show default location
         mMap.setOnCameraMoveStartedListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
-        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.darkmode));
 
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1200);
