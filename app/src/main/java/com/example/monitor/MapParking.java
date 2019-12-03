@@ -34,7 +34,6 @@ public class MapParking extends Fragment {
     public int value_place;
     TextView close_txt,slot_txt,available_txt,open_txt;
     SharedPreferences myPrefs;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
