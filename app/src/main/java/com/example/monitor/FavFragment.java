@@ -29,9 +29,9 @@ public class FavFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fav,container,false);
-        final Button image_1 = (Button) view.findViewById(R.id.button1);
-        final Button image_2 = (Button) view.findViewById(R.id.button2);
-        final Button image_3 = (Button) view.findViewById(R.id.button3);
+        final Button image_1 = (Button) view.findViewById(R.id.imageView3);
+        final Button image_2 = (Button) view.findViewById(R.id.imageView6);
+        final Button image_3 = (Button) view.findViewById(R.id.imageView7);
         myPrefs = this.getActivity().getSharedPreferences("ID", 0);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         data = database.getReference().child("User").child(rfid).child("fav");
@@ -153,7 +153,7 @@ public class FavFragment extends Fragment {
 //            image_3.setVisibility(View.GONE);
 //        }
 //        else if(value_count.equals("3")){
-                Button map1 = (Button)view.findViewById(R.id.button1);
+                Button map1 = (Button)view.findViewById(R.id.imageView3);
                 map1.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         myPrefs.edit().putInt("MapClick", 1).apply();
@@ -161,7 +161,7 @@ public class FavFragment extends Fragment {
                                 new MapParking()).commit();
                     }
                 });
-                Button map2 = (Button)view.findViewById(R.id.button2);
+                Button map2 = (Button)view.findViewById(R.id.imageView6);
                 map2.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         myPrefs.edit().putInt("MapClick", 2).apply();
@@ -169,7 +169,7 @@ public class FavFragment extends Fragment {
                                 new MapParking()).commit();
                     }
                 });
-                Button map3 = (Button)view.findViewById(R.id.button3);
+                Button map3 = (Button)view.findViewById(R.id.imageView7);
                 map3.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         myPrefs.edit().putInt("MapClick", 51).apply();
