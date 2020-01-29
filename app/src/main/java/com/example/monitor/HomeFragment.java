@@ -275,12 +275,12 @@ public class HomeFragment extends Fragment implements
                         FIBO_value_hour1 = Integer.parseInt(String.valueOf(map.get("hour")));
                         FIBO_value_min1 = Integer.parseInt(String.valueOf(map.get("min")));
                     }
-                    if (park.getKey().equals("1")) {
+                    if (park.getKey().equals("2")) {
                         Map map = (Map) park.child("open").getValue();
                         CB_value_hour1 = Integer.parseInt(String.valueOf(map.get("hour")));
                         CB_value_min1 = Integer.parseInt(String.valueOf(map.get("min")));
                     }
-                    if (park.getKey().equals("1")) {
+                    if (park.getKey().equals("51")) {
                         Map map = (Map) park.child("open").getValue();
                         teacher_value_hour1 = Integer.parseInt(String.valueOf(map.get("hour")));
                         teacher_value_min1 = Integer.parseInt(String.valueOf(map.get("min")));
