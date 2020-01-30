@@ -178,11 +178,11 @@ public class FavFragment extends Fragment {
                     }
                 });
             image_1.setText("FIBO");
-            image_1.setTextSize(35 );
+            image_1.setTextSize( 55);
             image_2.setText("CB1");
-            image_2.setTextSize(35);
+            image_2.setTextSize(55);
             image_3.setText("TEACHER");
-            image_3.setTextSize(35);
+            image_3.setTextSize(55);
 //        }
         return view;
     }
